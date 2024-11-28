@@ -1,0 +1,26 @@
+# Docker Compose to be ran on raspberry PI
+# Note: strfry expects default config file
+# Note: merchant expects .env file (see .env.example). It can reference #ws://0.0.0.0:7777:7777 as the relay
+services:
+  tollgate-merchant:
+    container_name: "tollgate-merchant"
+    image: 'tollgate-merchant'
+    network_mode: "host"
+    env_file:
+      - .env
+    restart: always
+  strfry-local:
+    container_name: "strfry-public"
+    image: 'dockurr/strfry'
+    command: bash -c "/app/strfry relay"
+    environment:
+      STRFRY_CONFIG: "/etc/config/strfry.conf"
+    restart: always
+    ports:
+      - "0.0.0.0:7777:7777"
+    volumes:
+      - db:/app/strfry-db
+      - ./config:/etc/config
+volumes:
+  application-conf:
+  db:
