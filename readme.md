@@ -4,7 +4,7 @@ This Tollgate module is responsible for:
 
 - Handling payments from customers
 - Initiating session after payment
-- Choosing upstream routers to connect to
+- Evaluating LAN sightings from crowsnest and making an economical decision on whether to connect to those spotted Tollgates.
 
 ### Docker build - Raspberry Pi
 
